@@ -1,0 +1,60 @@
+<h1>Create New Task</h1>
+
+<% if @task.errors.any? %>
+  <div>
+    <h2><%= pluralize(@task.errors.count, "error") %> prevented this task from being saved:</h2>
+    <ul>
+      <% @task.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<form action="<%= tasks_path %>" method="post">
+
+  <div>
+    <label for="task_name">Name</label>
+    <input type="text" id="task_name" name="task[name]" value="<%= @task.name %>">
+  </div>
+
+  <br>
+
+  <div>
+    <label for="task_description">Description</label>
+    <textarea id="task_description" name="task[description]"><%= @task.description %></textarea>
+  </div>
+
+  <br>
+
+  <div>
+    <label for="task_due_date">Due date</label>
+    <input type="date" id="task_due_date" name="task[due_date]" value="<%= @task.due_date %>">
+  </div>
+
+  <br>
+
+  <div>
+    <label for="task_category">Category</label>
+    <input type="text" id="task_category" name="task[category]" value="<%= @task.category %>">
+  </div>
+
+  <br>
+
+  <div>
+    <label for="task_priority">Priority</label>
+    <select id="task_priority" name="task[priority]">
+      <% ["Low", "Medium", "High"].each do |priority| %>
+        <option value="<%= priority %>" <%= "selected" if @task.priority == priority %>><%= priority %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <br>
+
+  <input type="submit" value="Create Task">
+</form>
+
+<br>
+
+<%= link_to "Back to Tasks", tasks_path %>

@@ -1,0 +1,27 @@
+<h1>Create New Subtask</h1>
+
+<h2>Task: <%= @task.name %></h2>
+
+<%= form_with model: [@task, @subtask] do |form| %>
+
+  <div>
+    <%= form.label :name, "Subtask Name" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= form.label :description, "Description" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <br>
+
+  <%= form.submit "Create Subtask" %>
+
+<% end %>
+
+<br>
+
+<%= link_to "Back to Subtasks", task_subtasks_path(@task) %>
